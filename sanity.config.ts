@@ -11,8 +11,8 @@ export default defineConfig({
   name: 'Folium_Studio',
   title: 'Folium Studio',
 
-  projectId,
-  dataset,
+  projectId: 'l0dhsylm',
+  dataset: 'production',
 
   plugins: [deskTool(), visionTool()],
 

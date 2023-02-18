@@ -27,20 +27,20 @@ type Props = {
   socials: Social[]
 }
 
-export default function Home({
-  pageInfo,
-  experiences,
-  skills,
-  projects,
-  socials,
-}: Props) {
+export default async function Home() {
+  const pageInfo: PageInfo = await fetchPageInfo()
+  const socials: Social[] = await fetchSocials()
+  const experiences: Experience[] = await fetchExperiences()
+  const skills: Skill[] = await fetchSkills()
+  const projects: Project[] = await fetchProjects()
+
   return (
     <div
       className='bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory 
     overflow-y-scroll overflow-x-hidden z-0 customScrollbar'
     >
       <Head>
-        <title>{pageInfo.name} - Portfolio</title>
+        <title>{pageInfo?.name} - Portfolio</title>
         <meta name='description' content='My portfolio' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
@@ -50,10 +50,6 @@ export default function Home({
 
       <section id='hero' className='snap-start'>
         <Hero pageInfo={pageInfo} />
-      </section>
-
-      <section id='about' className='snap-center'>
-        <About pageInfo={pageInfo} />
       </section>
 
       <section id='experience' className='snap-center'>
@@ -71,41 +67,27 @@ export default function Home({
       <section id='contact' className='snap-start'>
         <ContactMe />
       </section>
-
-      <Link href='#hero'>
-        <footer className='sticky bottom-5 w-full cursor-pointer '>
-          <div className='flex items-center justify-center'>
-            <Image
-              src={urlFor(pageInfo?.heroImage).url()}
-              className='w-10 h-10 rounded-full filter grayscale hover:grayscale-0 cursor-pointer'
-              alt={pageInfo?.name}
-              width={40}
-              height={40}
-            />
-          </div>
-        </footer>
-      </Link>
     </div>
   )
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  const pageInfo: PageInfo = await fetchPageInfo()
-  const experiences: Experience[] = await fetchExperiences()
-  const skills: Skill[] = await fetchSkills()
-  const projects: Project[] = await fetchProjects()
-  const socials: Social[] = await fetchSocials()
+// export const getStaticProps: GetStaticProps<Props> = async () => {
+//   const pageInfo: PageInfo = await fetchPageInfo()
+//   const experiences: Experience[] = await fetchExperiences()
+//   const skills: Skill[] = await fetchSkills()
+//   const projects: Project[] = await fetchProjects()
+//   const socials: Social[] = await fetchSocials()
 
-  return {
-    props: {
-      pageInfo,
-      experiences,
-      skills,
-      projects,
-      socials,
-    },
+//   return {
+//     props: {
+//       pageInfo,
+//       experiences,
+//       skills,
+//       projects,
+//       socials,
+//     },
 
-    // next.js attempts to revalidate the page when a request comes in (at most every 10s)
-    revalidate: 10,
-  }
-}
+//     // next.js attempts to revalidate the page when a request comes in (at most every 10s)
+//     revalidate: 10,
+//   }
+// }
