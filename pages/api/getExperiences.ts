@@ -9,7 +9,7 @@ const query = groq`
     *[_type == "experience"] {
         ...,
         technologies[]->
-    }
+    } | order(startDate desc)
 `
 
 export default async function handler(

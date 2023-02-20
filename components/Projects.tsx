@@ -64,7 +64,7 @@ const Projects = ({ projects }: Props) => {
                 ))}
               </div>
 
-              <p className='text-md text-center md:text-left'>
+              <p className='text-md text-center md:text-left max-w-[400px]'>
                 {project?.summary}
               </p>
             </div>
