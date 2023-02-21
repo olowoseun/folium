@@ -3,6 +3,7 @@
 import { urlFor } from '../sanity'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
 
 type Props = {
   projects: Project[]
@@ -14,37 +15,39 @@ const Projects = ({ projects }: Props) => {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className='h-screen relative flex overflow-hidden flex-col text-left md:flex-row 
-        max-w-full justify-evenly mx-auto items-center z-0'
+      className='relative z-0 mx-auto flex h-screen max-w-full flex-col 
+        items-center justify-evenly overflow-hidden text-left md:flex-row'
     >
-      <h3 className='absolute top-24 uppercase tracking-[20px] text-gray-500 text-2xl'>
+      <h3 className='absolute top-24 text-2xl uppercase tracking-[20px] text-gray-500'>
         Projects
       </h3>
 
-      <div className='w-full absolute top-[30%] bg-[#3752f1]/10 left-0 h-[300px] -skew-y-12' />
+      <div className='absolute top-[30%] left-0 h-[300px] w-full -skew-y-12 bg-[#3752f1]/10' />
 
       <div
-        className='relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory 
-            pt-24 z-20 customScrollbar'
+        className='customScrollbar relative z-20 flex w-full snap-x snap-mandatory 
+            overflow-x-scroll pt-24 overflow-y-hidden'
       >
         {projects?.map((project, i) => (
           <div
             key={project?._id}
-            className='w-screen flex-shrink-0 snap-center flex flex-col space-y-5
-                    items-center justify-center p-20 md:p-44 h-screen'
+            className='flex h-screen w-screen flex-shrink-0 snap-center flex-col
+                    items-center justify-center space-y-5 p-20 md:p-44'
           >
-            <motion.img
-              initial={{ y: -300, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1.2 }}
-              viewport={{ once: true }}
-              src={urlFor(project?.image).url()}
-              className='w-64 h-64'
-              alt=''
-            />
+            <Link href={project?.linkToBuild} className='h-64 w-64'>
+              <motion.img
+                initial={{ y: -300, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1.2 }}
+                viewport={{ once: true }}
+                src={urlFor(project?.image).url()}
+                className='h-48 w-48'
+                alt=''
+              />
+            </Link>
 
-            <div className='space-y-10 px-0 md:px-10 max-w-6xl'>
-              <h4 className='text-2xl font-semibold text-center'>
+            <div className='max-w-6xl space-y-10 px-0 md:px-10'>
+              <h4 className='text-center text-2xl font-semibold'>
                 <span className='underline decoration-[#3752f1]'>
                   Case Study {i + 1} of {projects.length}:
                 </span>{' '}
@@ -64,7 +67,7 @@ const Projects = ({ projects }: Props) => {
                 ))}
               </div>
 
-              <p className='text-md text-center md:text-left max-w-[400px]'>
+              <p className='text-md max-w-[400px] text-center md:text-left'>
                 {project?.summary}
               </p>
             </div>

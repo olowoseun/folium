@@ -36,8 +36,8 @@ export default async function Home() {
 
   return (
     <div
-      className='bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory 
-    overflow-y-scroll overflow-x-hidden z-0 customScrollbar'
+      className='customScrollbar z-0 h-screen snap-y snap-mandatory 
+    overflow-y-scroll bg-[rgb(36,36,36)] text-white overflow-x-hidden'
     >
       <Head>
         <title>{pageInfo?.name} - Portfolio</title>
